@@ -6,6 +6,7 @@
 *.exe
 *.so
 *.wl6
+*.elf
 
 # Intermediate source #
 ###################
