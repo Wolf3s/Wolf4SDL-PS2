@@ -136,11 +136,7 @@ CP_itemtype CtlMenu[] = {
 #else
     {0, STR_MOUSEEN, 0},
     {0, STR_SENS, MouseSensitivity},
-#ifdef PS2
-    {1, STR_JOYEN, 0},
-#else
     {0, STR_JOYEN, 0},
-#endif
     {1, STR_CUSTOM, CustomControls}
 #endif
 };

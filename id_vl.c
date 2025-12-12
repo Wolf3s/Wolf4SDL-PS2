@@ -33,10 +33,10 @@ int      screenBits = 8;
 int      screenBits = 16;
 #endif
 #elif defined(PS2)
-boolean usedoublebuffering = false;
+boolean usedoublebuffering = true;
 unsigned screenWidth = 320;
 unsigned screenHeight = 240;
-int      screenBits = 8;
+int      screenBits = 16;
 #else
 boolean usedoublebuffering = true;
 unsigned screenWidth = 640;
@@ -170,6 +170,7 @@ void VL_SetVGAPlaneMode (void)
     SDL_SetColors(screenBuffer, gamepal, 0, 256);
 #else
 #ifdef PS2
+    SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight,
         (fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 #else
@@ -189,11 +190,7 @@ void VL_SetVGAPlaneMode (void)
         printf("Unable to set %ix%ix%i video mode: %s\n", screenWidth, screenHeight, screenBits, SDL_GetError());
         exit(1);
     }
-#ifdef PS2
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-#else
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-#endif
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
@@ -325,8 +322,11 @@ void VL_SetColor	(int color, int red, int green, int blue)
     {
         SDL_SetPaletteColors(screenBuffer->format->palette, &col, color, 1);
         SDL_BlitSurface(screenBuffer, NULL, screen, NULL);
-
+#ifdef PS2
+        SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR1555, SDL_TEXTUREACCESS_STREAMING, screenWidth, screenHeight);
+#else
         SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, screenBuffer);
+#endif
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
         SDL_DestroyTexture(texture);
