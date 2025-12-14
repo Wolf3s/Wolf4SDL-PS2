@@ -12,6 +12,7 @@ Pick the Wolf4SDL executable compatible with the game version,
 unzip it then go to pcsx2 and execute the elf file or in real hardware transfer the folder unzipped to your pen-drive,
 run wLaunchELF and find the game on `mass0:` or `mc0:` if you transfer it, then hit the .ELF file and done.
 
+```
 Note: 
 hdd and mc support is not tested(mc support should be work fine by the way, but don´t hesitate to contact me). 
 
@@ -24,6 +25,7 @@ Circle: Next weapon \
 Cross: Open \
 Left Stick: Move
 Right Stick: Look
+
 
 # Bugs
 * Performance issues
