@@ -26,7 +26,7 @@ Left Stick: Move
 Right Stick: Look
 
 # Bugs
-* Controls hangs when initiating a new game
+* Performance issues
 
 ## License
 
