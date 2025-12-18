@@ -18,7 +18,7 @@
 #endif
 
 boolean fullscreen = true;
-#if defined(_arch_dreamcast)
+#if defined(_arch_dreamcast) || defined(PS2)
 boolean usedoublebuffering = false;
 unsigned screenWidth = 320;
 unsigned screenHeight = 200;
@@ -32,11 +32,6 @@ int      screenBits = 8;
 #else
 int      screenBits = 16;
 #endif
-#elif defined(PS2)
-boolean usedoublebuffering = true;
-unsigned screenWidth = 320;
-unsigned screenHeight = 240;
-int      screenBits = 16;
 #else
 boolean usedoublebuffering = true;
 unsigned screenWidth = 640;
@@ -171,6 +166,9 @@ void VL_SetVGAPlaneMode (void)
 #else
 #ifdef PS2
     SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
+	SDL_SetHint(SDL_HINT_PS2_GS_WIDTH, "640");
+	SDL_SetHint(SDL_HINT_PS2_GS_HEIGHT, "480");    
+	SDL_SetHint(SDL_HINT_PS2_GS_MODE, "PAL");
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight,
         (fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 #else

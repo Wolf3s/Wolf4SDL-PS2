@@ -7,7 +7,7 @@
 void Present(SDL_Surface *screen)
 {
 #ifdef PS2
-    SDL_UpdateTexture(texture, NULL, screen->pixels, screenWidth * sizeof (Uint16));
+    SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
 #else
     SDL_UpdateTexture(texture, NULL, screen->pixels, screenWidth * sizeof (Uint32));
 #endif
