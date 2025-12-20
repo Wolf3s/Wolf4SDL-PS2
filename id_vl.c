@@ -168,7 +168,6 @@ void VL_SetVGAPlaneMode (void)
     SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
 	SDL_SetHint(SDL_HINT_PS2_GS_WIDTH, "640");
 	SDL_SetHint(SDL_HINT_PS2_GS_HEIGHT, "480");    
-	SDL_SetHint(SDL_HINT_PS2_GS_MODE, "PAL");
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight,
         (fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 #else
