@@ -26,10 +26,6 @@ Cross: Open \
 Left Stick: Move
 Right Stick: Look
 
-
-# Bugs
-* Performance issues
-
 ## License
 
 Wolf4SDL was released as ID License, and it remains as such. New code written
