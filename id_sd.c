@@ -912,7 +912,7 @@ SD_Startup(void)
     if (SD_Started)
         return;
 
-#ifdef __PS2__
+#ifdef PS2
     if(Mix_OpenAudio(param_samplerate, AUDIO_S16SYS, 2, param_audiobuffer))
 #else
     if(Mix_OpenAudio(param_samplerate, AUDIO_S16, 2, param_audiobuffer))
