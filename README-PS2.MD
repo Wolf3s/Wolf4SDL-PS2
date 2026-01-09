@@ -32,6 +32,9 @@ Wolf4SDL was released as ID License, and it remains as such. New code written
 for the PS2 port or any changes made to the original source code are also released under the
 ID SOFTWARE LICENSE. See the accompanying [license-id.txt](license-id.txt) for details.
 
+## Issues
+Some controls are not detecting
+
 ## Credits
 
 * id Software for releasing the Wolfenstein engine
