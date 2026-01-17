@@ -4014,36 +4014,42 @@ CheckForEpisodes (void)
     struct stat statbuf;
 
     // On Linux like systems, the configdir defaults to $HOME/.wolf4sdl
-#if !defined(_WIN32) && !defined(_arch_dreamcast)
-    if(configdir[0] == 0)
-    {
-        // Set config location to home directory for multi-user support
-        char *homedir = getenv("HOME");
-        if(homedir == NULL)
-        {
-            Quit("Your $HOME directory is not defined. You must set this before playing.");
-        }
-        #define WOLFDIR "/.wolf4sdl"
-        if(strlen(homedir) + sizeof(WOLFDIR) > sizeof(configdir))
-        {
-            Quit("Your $HOME directory path is too long. It cannot be used for saving games.");
-        }
-        snprintf(configdir, sizeof(configdir), "%s" WOLFDIR, homedir);
-    }
-#elif defined(PS2)
-    if(configdir[0] == 0)
-    {
-        // Set config location to home directory for multi-user support
-        char *homedir = SDL_GetBasePath();
-        if(homedir == NULL)
-        {
-            Quit("Data failes couldn't be finded");
-        }
+#if !defined(_WIN32) && !defined(_arch_dreamcast) && !defined(PS2)
 
-        snprintf(configdir, sizeof(configdir), "%s", homedir);
+if (configdir[0] == 0)
+{
+    char *homedir = getenv("HOME");
+    if (homedir == NULL)
+    {
+        Quit("Your $HOME directory is not defined. You must set this before playing.");
     }
+
+    #define WOLFDIR "/.wolf4sdl"
+
+    if (strlen(homedir) + sizeof(WOLFDIR) > sizeof(configdir))
+    {
+        Quit("Your $HOME directory path is too long. It cannot be used for saving games.");
+    }
+
+    snprintf(configdir, sizeof(configdir), "%s" WOLFDIR, homedir);
+}
+
+#elif defined(PS2)
+
+if (configdir[0] == 0)
+{
+    char *basepath = SDL_GetBasePath();
+    if (basepath == NULL)
+    {
+        Quit("Unable to determine base path.");
+    }
+
+    snprintf(configdir, sizeof(configdir), "%s", basepath);
+    SDL_free(basepath);
+}
 
 #endif
+
 
     if(configdir[0] != 0)
     {
