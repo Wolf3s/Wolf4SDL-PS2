@@ -4014,7 +4014,7 @@ CheckForEpisodes (void)
     struct stat statbuf;
 
     // On Linux like systems, the configdir defaults to $HOME/.wolf4sdl
-#if !defined(_WIN32) && !defined(_arch_dreamcast) && !defined(PS2)
+#if !defined(_WIN32) && !defined(_arch_dreamcast)
     if(configdir[0] == 0)
     {
         // Set config location to home directory for multi-user support
@@ -4030,6 +4030,19 @@ CheckForEpisodes (void)
         }
         snprintf(configdir, sizeof(configdir), "%s" WOLFDIR, homedir);
     }
+#elif defined(PS2)
+    if(configdir[0] == 0)
+    {
+        // Set config location to home directory for multi-user support
+        char *homedir = SDL_GetBasePath();
+        if(homedir == NULL)
+        {
+            Quit("Data failes couldn't be finded");
+        }
+
+        snprintf(configdir, sizeof(configdir), "%s", homedir);
+    }
+
 #endif
 
     if(configdir[0] != 0)
